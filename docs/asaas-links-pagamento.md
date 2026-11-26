@@ -13,7 +13,7 @@ Como criar, alterar, listar e excluir os **links de pagamento** (`paymentLinks`)
 
 > A chave de produçêo começa com `$aact_prod...`. **Nunca** comitar a chave nem colocá-la neste repositório público. Teste em sandbox antes de mexer em produçêo.
 
-Convençêo do prefixo (vista em `inemaonline/worker/src/asaas.ts`): prod = `$aact_M` / `$aact_prod`, sandbox = `$aact_YT`.
+Convençêo do prefixo (vista em `ARCKHÉonline/worker/src/asaas.ts`): prod = `$aact_M` / `$aact_prod`, sandbox = `$aact_YT`.
 
 ## 2. Campos que controlam o comportamento
 
@@ -133,4 +133,4 @@ console.log(r.status, (await r.json()).billingType);
 ```
 
 ---
-Ref. oficial: https://docs.asaas.com/reference/criar-um-link-de-pagamentos · INEMA.CLUB · 2026
+Ref. oficial: https://docs.asaas.com/reference/criar-um-link-de-pagamentos · ARCKHÉ AI · 2026

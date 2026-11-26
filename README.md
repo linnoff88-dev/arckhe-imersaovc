@@ -8,7 +8,7 @@
 
 Quatro versêÂµes de landing page de vendas para a **ImersêÂ£o Vibe Coding** (Do Zero ao SaaS com IA em 3 dias, presencial em ItaguaêÂ­ ê¢â¬â RJ).
 
-ê°Å¸ââ **Online (GitHub Pages):** https://inematds.github.io/imersaovc/
+ê°Å¸ââ **Online (GitHub Pages):** https://linnoff88-dev.github.io/arckhe-/
 
 ## VersêÂµes
 
@@ -29,7 +29,7 @@ Quatro versêÂµes de landing page de vendas para a **ImersêÂ£o Vibe Cod
 
 ## Pagamento via Asaas
 
-Mesmo padrêÂ£o usado no **inema.vip**: o botêÂ£o de CTA aponta direto para o **link de checkout do Asaas** (`https://www.asaas.com/c/XXXX`).
+Mesmo padrêÂ£o usado no **ARCKHÉ.vip**: o botêÂ£o de CTA aponta direto para o **link de checkout do Asaas** (`https://www.asaas.com/c/XXXX`).
 
 **JêÂ¡ configurado.** O botêÂ£o "Garantir vaga" das 4 versêÂµes aponta para o link real:
 
@@ -41,7 +41,7 @@ Para trocar o link, basta substituir essa URL nos `versao-*.html`.
 
 ### CobranêÂ§a dinêÂ¢mica (opcional)
 
-Para gerar cobranêÂ§as via API (customer + payment, webhook de confirmaêÂ§êÂ£o, controle automêÂ¡tico de vagas), o cliente de referêÂªncia jêÂ¡ existe em `inemaonline` (`worker/src/asaas.ts`): cria customer, cria payment, processa webhook `PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`.
+Para gerar cobranêÂ§as via API (customer + payment, webhook de confirmaêÂ§êÂ£o, controle automêÂ¡tico de vagas), o cliente de referêÂªncia jêÂ¡ existe em `ARCKHÉonline` (`worker/src/asaas.ts`): cria customer, cria payment, processa webhook `PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`.
 
 ## Editar datas/local
 
@@ -52,7 +52,7 @@ As pêÂ¡ginas usam o local **ItaguaêÂ­ ê¢â¬â RJ, Rua Prefeit
 HTML estêÂ¡tico + Tailwind (CDN) + Google Fonts. Sem build. Abre direto no navegador.
 
 ---
-INEMA.CLUB êÂ· 2026
+ARCKHÉ AI êÂ· 2026
 
 ---
 
