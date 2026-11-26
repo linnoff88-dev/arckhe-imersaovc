@@ -1,26 +1,26 @@
 # Asaas — Gerenciar links de pagamento pela API
 
-Como criar, alterar, listar e excluir os **links de pagamento** (`paymentLinks`) da Imersão Vibe Coding direto pela API do Asaas. Foi assim que os links em produção foram gerados e ajustados.
+Como criar, alterar, listar e excluir os **links de pagamento** (`paymentLinks`) da Imersêo Vibe Coding direto pela API do Asaas. Foi assim que os links em produçêo foram gerados e ajustados.
 
-## 1. Autenticação e ambiente
+## 1. Autenticaçêo e ambiente
 
 | Item | Valor |
 |---|---|
 | Header de auth | `access_token: <SUA_CHAVE>` |
-| Base produção | `https://api.asaas.com/v3` |
+| Base produçêo | `https://api.asaas.com/v3` |
 | Base sandbox | `https://api-sandbox.asaas.com/v3` |
 | Onde fica a chave | no arquivo de variáveis de ambiente do worker (`.dev.vars` / `wrangler secret`) — **fora deste repo** |
 
-> A chave de produção começa com `$aact_prod...`. **Nunca** comitar a chave nem colocá-la neste repositório público. Teste em sandbox antes de mexer em produção.
+> A chave de produçêo começa com `$aact_prod...`. **Nunca** comitar a chave nem colocá-la neste repositório público. Teste em sandbox antes de mexer em produçêo.
 
-Convenção do prefixo (vista em `inemaonline/worker/src/asaas.ts`): prod = `$aact_M` / `$aact_prod`, sandbox = `$aact_YT`.
+Convençêo do prefixo (vista em `inemaonline/worker/src/asaas.ts`): prod = `$aact_M` / `$aact_prod`, sandbox = `$aact_YT`.
 
 ## 2. Campos que controlam o comportamento
 
 | Campo | O que faz | Valores |
 |---|---|---|
 | `name` | Nome interno do link | texto |
-| `value` | Valor em **reais** (não centavos) | ex. `3000` |
+| `value` | Valor em **reais** (nêo centavos) | ex. `3000` |
 | `billingType` | **Forma de pagamento aceita** | `UNDEFINED` (cliente escolhe) · `CREDIT_CARD` · `PIX` · `BOLETO` |
 | `chargeType` | Tipo de cobrança | `DETACHED` (avulsa) · `INSTALLMENT` (parcelado) · `RECURRENT` (assinatura) |
 | `maxInstallmentCount` | **Nº máximo de parcelas** (só com `INSTALLMENT`) | ex. `6` |
@@ -28,11 +28,11 @@ Convenção do prefixo (vista em `inemaonline/worker/src/asaas.ts`): prod = `$aa
 | `subscriptionCycle` | Periodicidade (só com `RECURRENT`) | `MONTHLY`, `YEARLY`, ... |
 | `notificationEnabled` | Notificações ao cliente | `true`/`false` |
 
-**Regra de ouro:** parcelamento (`INSTALLMENT` + `maxInstallmentCount`) é **cartão de crédito**. Para travar só cartão, use `billingType: "CREDIT_CARD"`.
+**Regra de ouro:** parcelamento (`INSTALLMENT` + `maxInstallmentCount`) é **cartêo de crédito**. Para travar só cartêo, use `billingType: "CREDIT_CARD"`.
 
 ## 3. Endpoints
 
-| Ação | Método + rota |
+| Açêo | Método + rota |
 |---|---|
 | Criar | `POST /v3/paymentLinks` |
 | Atualizar | `PUT /v3/paymentLinks/{id}` |
@@ -41,18 +41,18 @@ Convenção do prefixo (vista em `inemaonline/worker/src/asaas.ts`): prod = `$aa
 | Excluir | `DELETE /v3/paymentLinks/{id}` |
 | Restaurar | `POST /v3/paymentLinks/{id}/restore` |
 
-A resposta de criação/consulta traz `id` e `url` (`https://www.asaas.com/c/{id}`) — é a `url` que vai nos botões da landing.
+A resposta de criaçêo/consulta traz `id` e `url` (`https://www.asaas.com/c/{id}`) — é a `url` que vai nos botões da landing.
 
 ## 4. Receitas — "como mudar cada coisa"
 
-Em todos os exemplos: `KEY` = sua chave; produção. (`-s` = silencioso)
+Em todos os exemplos: `KEY` = sua chave; produçêo. (`-s` = silencioso)
 
-### Criar um link (parcelado, só cartão)
+### Criar um link (parcelado, só cartêo)
 ```bash
 curl -s -X POST https://api.asaas.com/v3/paymentLinks \
   -H "access_token: $KEY" -H "Content-Type: application/json" \
   -d '{
-    "name": "Imersão Vibe Coding — R$ 3.000 (6x)",
+    "name": "Imersêo Vibe Coding — R$ 3.000 (6x)",
     "billingType": "CREDIT_CARD",
     "chargeType": "INSTALLMENT",
     "value": 3000,
@@ -61,7 +61,7 @@ curl -s -X POST https://api.asaas.com/v3/paymentLinks \
   }'
 ```
 
-### Mudar a FORMA DE PAGAMENTO (ex.: travar em só cartão)
+### Mudar a FORMA DE PAGAMENTO (ex.: travar em só cartêo)
 ```bash
 curl -s -X PUT https://api.asaas.com/v3/paymentLinks/{id} \
   -H "access_token: $KEY" -H "Content-Type: application/json" \
@@ -97,12 +97,12 @@ curl -s https://api.asaas.com/v3/paymentLinks -H "access_token: $KEY"
 curl -s https://api.asaas.com/v3/paymentLinks/{id} -H "access_token: $KEY"
 ```
 
-## 5. O que NÃO se muda pela API
+## 5. O que NêO se muda pela API
 
-- **Cupom / voucher de código** (cliente digita e abate): **não existe** no Asaas. Alternativas: link separado com valor menor, ou checkout próprio + API criando a cobrança com `discount`.
-- **6x sem juros para o cliente**: é config da **conta** (painel → Configurações → Parcelamento — quem assume os juros). Não é um campo do link.
+- **Cupom / voucher de código** (cliente digita e abate): **nêo existe** no Asaas. Alternativas: link separado com valor menor, ou checkout próprio + API criando a cobrança com `discount`.
+- **6x sem juros para o cliente**: é config da **conta** (painel → Configurações → Parcelamento — quem assume os juros). Nêo é um campo do link.
 
-## 6. Links atuais (produção)
+## 6. Links atuais (produçêo)
 
 Todos `CREDIT_CARD` + `INSTALLMENT`, ativos:
 
@@ -113,7 +113,7 @@ Todos `CREDIT_CARD` + `INSTALLMENT`, ativos:
 | R$ 2.500 | 5x | `hzz4io2te275dqtk` | https://www.asaas.com/c/hzz4io2te275dqtk |
 | R$ 3.000 | 6x | `hkzrb361iks95c50` | https://www.asaas.com/c/hkzrb361iks95c50 |
 
-Nas landings (`versao-*.html`), o botão usa o link de **R$ 3.000**.
+Nas landings (`versao-*.html`), o botêo usa o link de **R$ 3.000**.
 
 ## 7. Snippet Node (chave via variável de ambiente, nunca hardcoded)
 
@@ -123,7 +123,7 @@ const key = process.env.ASAAS_API_KEY;
 const base = 'https://api.asaas.com/v3';
 const H = { access_token: key, 'Content-Type': 'application/json' };
 
-// exemplo: travar um link em só cartão
+// exemplo: travar um link em só cartêo
 const id = 'hkzrb361iks95c50';
 const r = await fetch(`${base}/paymentLinks/${id}`, {
   method: 'PUT', headers: H,
